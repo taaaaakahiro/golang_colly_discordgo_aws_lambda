@@ -1,0 +1,5 @@
+.terraform
+.terraform.*
+.envrc
+main
+main.zip
