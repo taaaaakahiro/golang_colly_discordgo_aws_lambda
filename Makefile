@@ -6,3 +6,9 @@ ap:
 
 de:
 	terraform destroy -input=false -auto-approve -lock=false
+
+run:
+	go run ./src/cmd/main.go
+
+test:
+	go test ./...
