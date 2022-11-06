@@ -12,3 +12,7 @@ run:
 
 test:
 	go test ./...
+
+build:
+	GOARCH=amd64 GOOS=linux CGO_ENABLED=0 go build -o main ./src/cmd
+	zip main.zip main
