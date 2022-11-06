@@ -28,6 +28,7 @@ func Handler() {
 	}
 
 	text := make([]string, 0)
+	//todo:  textの整形
 	for _, property := range properties {
 		text = append(text,
 			"```",
