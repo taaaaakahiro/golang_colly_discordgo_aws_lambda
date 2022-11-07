@@ -6,7 +6,6 @@ import (
 	"golang-aws-lambda/src/pkg/crawl"
 	"log"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -27,19 +26,18 @@ func Handler() {
 		log.Fatal(err)
 	}
 
-	text := make([]string, 0)
 	//todo:  textの整形
+	fields := make([]discordwebhook.Field, 0)
 	for _, property := range properties {
-		text = append(text,
-			"```",
-			property.Title,
-			property.DetailUrl,
-			property.Address,
-			property.Square,
-			"```",
-		)
+		inline := true
+		v := fmt.Sprintf(">>> %s / %s / %s", property.Address, property.Square, property.DetailUrl)
+		field := discordwebhook.Field{
+			Name:   &property.Title,
+			Value:  &v,
+			Inline: &inline,
+		}
+		fields = append(fields, field)
 	}
-	t := strings.Join(text, ",")
 
 	today := time.Now()
 	month := int(today.Month())
@@ -47,6 +45,7 @@ func Handler() {
 	date := fmt.Sprintf(" %d/%d", month, day)
 	botName := "まーうんだよ"
 	headerTitle := "New" + date + " 新着物件"
+
 	footerText := "Sent By CAT@不動産を買う仕事してました"
 	footer := &discordwebhook.Footer{
 		Text: &footerText,
@@ -55,7 +54,13 @@ func Handler() {
 	message := discordwebhook.Message{
 		Username: &botName,
 		Embeds: &[]discordwebhook.Embed{
-			{Title: &headerTitle, Url: &url, Description: &t, Footer: footer},
+			{
+				Title: &headerTitle,
+				Url:   &url,
+				//Description: &t,
+				Fields: &fields,
+				Footer: footer,
+			},
 		},
 	}
 

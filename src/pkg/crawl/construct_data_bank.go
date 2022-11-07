@@ -34,7 +34,7 @@ func (cdb *ConstructDataBank) GetProperties(url string) ([]*entity.Property, err
 						trim := strings.Split(element2.Text, "更新")
 						project := strings.TrimSpace(trim[1])
 						items[idx] = append(items[idx], project)
-						items[idx] = append(items[idx], url+href[2:])
+						items[idx] = append(items[idx], url+href[1:])
 
 					} else if i == 1 {
 						items[idx] = append(items[idx], element2.Text)
