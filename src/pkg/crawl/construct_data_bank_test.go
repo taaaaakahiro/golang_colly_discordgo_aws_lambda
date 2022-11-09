@@ -13,7 +13,7 @@ var (
 
 func TestMain(m *testing.M) {
 	println("before all...")
-	url = os.Getenv("URL")
+	url = os.Getenv("TARGET_URL")
 	crawl, _ = NewCrawl()
 
 	code := m.Run()
@@ -22,7 +22,7 @@ func TestMain(m *testing.M) {
 	os.Exit(code)
 }
 
-func TestGetBoardItem(t *testing.T) {
+func TestGetProperties(t *testing.T) {
 	t.Run("ok", func(t *testing.T) {
 		items, err := crawl.ConstructDataBank.GetProperties(url)
 		assert.NoError(t, err)

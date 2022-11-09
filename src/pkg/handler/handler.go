@@ -11,7 +11,7 @@ import (
 
 func Handler() {
 	// env
-	hook := os.Getenv("HOOK_ESC_KEY")
+	hook := os.Getenv("HOOK_REAL_ESTATE")
 	url := os.Getenv("URL")
 
 	crawl, err := crawl.NewCrawl()
@@ -44,7 +44,7 @@ func Handler() {
 	day := today.Day()
 	date := fmt.Sprintf(" %d/%d", month, day)
 	botName := "まーうんだよ"
-	headerTitle := "New" + date + " 新着物件"
+	headerTitle := "New" + date + " 新着建設地 上位10件"
 
 	footerText := "Sent By CAT@不動産を買う仕事してました"
 	footer := &discordwebhook.Footer{
