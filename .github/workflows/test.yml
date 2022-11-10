@@ -1,4 +1,4 @@
-name: golang test
+name: GitHub actions test golang-aws-lambda-colly-discordgo
 
 on:
   push:
