@@ -20,4 +20,4 @@ jobs:
       - name: Test
         run: go test -v ./... \
         env:
-          TARGET_URL: https://www.kensetsu-databank.co.jp
+          TARGET_URL: ${{ secrets.MESSAGE }}
