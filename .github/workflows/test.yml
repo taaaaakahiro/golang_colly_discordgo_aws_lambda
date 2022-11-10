@@ -20,4 +20,4 @@ jobs:
       - name: Test
         run: go test -v ./... \
         env:
-          TARGET_URL: ${{ secrets.MESSAGE }}
+          TARGET_URL: ${{ secrets.TARGET_URL }}
