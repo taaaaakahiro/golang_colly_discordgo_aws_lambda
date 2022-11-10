@@ -2,6 +2,7 @@ package crawl
 
 import (
 	"github.com/stretchr/testify/assert"
+	"log"
 	"os"
 	"testing"
 )
@@ -14,6 +15,9 @@ var (
 func TestMain(m *testing.M) {
 	println("before all...")
 	url = os.Getenv("TARGET_URL")
+	if len(url) == 0 {
+		log.Fatal("failed to load env")
+	}
 	crawl, _ = NewCrawl()
 
 	code := m.Run()
