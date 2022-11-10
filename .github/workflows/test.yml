@@ -17,8 +17,7 @@ jobs:
         with:
           go-version: 1.18
 
-      - name: Build
-        run: go build -v ./...
-
       - name: Test
         run: go test -v ./...
+        env:
+          TARGET_URL: ${{secrets.TARGET_URL}}
