@@ -19,6 +19,6 @@ jobs:
 
       - name: Test
         run: go test -v ./... \
-          echo ${{secrets.TARGET_URL}}
+          echo ${{secrets.TARGET_URL}} 11111
         env:
           TARGET_URL: ${{secrets.TARGET_URL}}
