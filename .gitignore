@@ -6,3 +6,4 @@ main
 .idea
 *.tfvars
 *.zip
+out
