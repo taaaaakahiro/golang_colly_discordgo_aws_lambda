@@ -1,6 +1,8 @@
 .terraform
 .terraform.*
 .envrc
-main.zip
+terraform/main.zip
 main
 .idea
+*.tfvars
+*.zip

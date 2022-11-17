@@ -29,8 +29,8 @@ resource "aws_lambda_function" "test_lambda" {
   environment {
     variables = {
       EXECUTE_ENV = "prod"
-      HOOK_REAL_ESTATE = ""
-      TARGET_URL = ""
+      HOOK_REAL_ESTATE = var.hook_real_estate
+      TARGET_URL = var.target_url
     }
   }
 }
