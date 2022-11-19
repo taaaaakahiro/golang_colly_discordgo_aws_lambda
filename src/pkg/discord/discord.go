@@ -24,11 +24,6 @@ func (d Discord) GetMessage() discordwebhook.Message {
 		fmt.Println("failed to init crawl")
 		log.Fatal(err)
 	}
-	//externals, err := external.NewExternal()
-	if err != nil {
-		fmt.Println("failed to init external")
-		log.Fatal(err)
-	}
 
 	properties, err := crawl.ConstructDataBank.GetProperties(d.url)
 	if err != nil {
