@@ -18,10 +18,15 @@ func NewDiscord(url string) *Discord {
 	}
 }
 
-func (d Discord) GetProperties() discordwebhook.Message {
+func (d Discord) GetMessage() discordwebhook.Message {
 	crawl, err := crawl.NewCrawl()
 	if err != nil {
 		fmt.Println("failed to init crawl")
+		log.Fatal(err)
+	}
+	//externals, err := external.NewExternal()
+	if err != nil {
+		fmt.Println("failed to init external")
 		log.Fatal(err)
 	}
 
@@ -31,7 +36,24 @@ func (d Discord) GetProperties() discordwebhook.Message {
 		log.Fatal(err)
 	}
 
-	//todo:  textの整形
+	botName := "建築看板通知 Bot"
+	footerText := "Sent By CAT@不動産を買う仕事してました"
+	footer := &discordwebhook.Footer{
+		Text: &footerText,
+	}
+
+	// 新着なし
+	if len(properties) == 0 {
+		content := "本日の新着はありません"
+		m := discordwebhook.Message{
+			Username: &botName,
+			Content:  &content,
+			Embeds:   &[]discordwebhook.Embed{},
+		}
+		return m
+	}
+
+	//新着あり
 	fields := make([]discordwebhook.Field, 0)
 	for _, property := range properties {
 		inline := true
@@ -44,23 +66,12 @@ func (d Discord) GetProperties() discordwebhook.Message {
 		fields = append(fields, field)
 	}
 
-	today := time.Now()
-	month := int(today.Month())
-	day := today.Day()
-	date := fmt.Sprintf(" %d/%d", month, day)
-	botName := "まーうんだよ"
-	headerTitle := "New" + date + " 建設地 上位10件"
-
-	footerText := "Sent By CAT@不動産を買う仕事してました"
-	footer := &discordwebhook.Footer{
-		Text: &footerText,
-	}
-
+	title := makeTitle(len(properties))
 	message := discordwebhook.Message{
 		Username: &botName,
 		Embeds: &[]discordwebhook.Embed{
 			{
-				Title:  &headerTitle,
+				Title:  &title,
 				Url:    &d.url,
 				Fields: &fields,
 				Footer: footer,
@@ -68,4 +79,12 @@ func (d Discord) GetProperties() discordwebhook.Message {
 		},
 	}
 	return message
+}
+
+func makeTitle(cnt int) string {
+	today := time.Now()
+	month := int(today.Month())
+	day := today.Day()
+	date := fmt.Sprintf(" %d/%d", month, day)
+	return fmt.Sprintf("New %s 建設地 上位%d件", date, cnt)
 }

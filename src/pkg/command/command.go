@@ -15,7 +15,6 @@ const (
 
 func Run() {
 	os.Exit(run(context.Background()))
-	//run(context.Background())
 }
 
 func run(_ context.Context) int {

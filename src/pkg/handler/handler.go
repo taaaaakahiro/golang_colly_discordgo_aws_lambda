@@ -13,7 +13,7 @@ func Handler() {
 	hook := os.Getenv("HOOK_REAL_ESTATE")
 	url := os.Getenv("TARGET_URL")
 	d := discord.NewDiscord(url)
-	message := d.GetProperties()
+	message := d.GetMessage()
 
 	err := discordwebhook.SendMessage(hook, message)
 	if err != nil {
